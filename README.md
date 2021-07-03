@@ -12,5 +12,5 @@ Arduino_TensorFlowLite (To be able to do machine learning on the arduino)
 Arduino_BLE (To be able to use BLE)
 
 The following 3rd party modules will be used for the websites:
-p5 ble js
-bootstrap 
+p5 ble js (to enable BLE communications)
+bootstrap (for design)

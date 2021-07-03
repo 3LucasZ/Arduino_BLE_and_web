@@ -1,0 +1,93 @@
+<!doctype html>
+  <html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <!-- Bootstrap CSS + custom CSS-->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link rel="stylesheet" href="customize.css">
+      
+      <!-- use p5 ble js -->
+      <script src="https://unpkg.com/p5ble@0.0.4/dist/p5.ble.js"></script>
+
+      <title>Action Classifier</title>
+
+    </head>
+
+    <body>
+      <!-- Bootstrap Bundle with Popper -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-7 Arduino-bg border ArduinoDark-bd border-4">
+            <div class="d-flex h-100 align-items-center justify-content-center">
+              <h1 class="text-center">Action Classifier</h1>
+            </div>
+          </div>
+          <div class="text-center col-2 border-top border-bottom ArduinoDark-bd border-4">
+            <div class = "row border-bottom border-2  ArduinoDark-bd">
+              <button type="button" class="rounded-0 ArduinoLight-bg btn btn-sm" onclick="connectToBle()">Connect</button>
+            </div>
+            <div class="row border-top border-2 ArduinoDark-bd">
+                <button type="button" class="rounded-0 ArduinoLight-bg btn btn-sm" onclick="disconnectToBle()">Disconnect</button>
+            </div>
+          </div>
+          <div class="col-3 Arduino-bg border ArduinoDark-bd border-4">
+            <div class="d-flex h-100 align-items-center justify-content-center">
+              <h5 class="text-center"><div id="status">Status: disconnected</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h1 class="text-center"><div id="actionDiv">Action: none</div></h1>
+        </div>
+      </div>
+      <!--
+        <audio src="">
+        <p>Audio is not supported in your browser</p>
+      </audio>
+      -->
+
+      <script>
+        //set up
+        //set this to the service uuid of your device
+        const serviceUuid = "19b10010-e8f2-537e-4f6c-d104768a1214";
+        let actionCharacteristic;
+        let myBLE = new p5ble();
+        var actionDiv = document.getElementById("actionDiv");
+        var statusDiv = document.getElementById("status");
+        
+        const actions = ["none", "feed", "play"]
+
+        //called when "connect" is pressed
+        function connectToBle() {
+          // Connect to a device by passing the service UUID
+          myBLE.connect(serviceUuid, gotCharacteristics);
+        }
+        //called when"disconnect" is pressed
+        function disconnectToBle() {
+          // Disonnect to the device
+          myBLE.disconnect();
+          // Check if myBLE is connected
+          statusDiv.innerHTML="Status: " + (myBLE.isConnected() ? "Connected" : "Disconnected");
+        }
+
+        // A function that will be called once characteristics are received
+        function gotCharacteristics(error, characteristics) {
+          if (error) console.log('error: ', error);
+          console.log('characteristics: ', characteristics);
+          statusDiv.innerHTML="Status: " + (myBLE.isConnected() ? "Connected" : "Disconnected");
+          actionCharacteristic = characteristics[0];
+          myBLE.startNotifications(actionCharacteristic, handleNotifications);
+        }
+        // Callback function for when notifications are received
+        function handleNotifications(data) {
+          console.log('value: ', data);
+          actionDiv.innerHTML = "action: " + actions[data];
+        }
+
+      </script>
+    </body>
+  </html>
