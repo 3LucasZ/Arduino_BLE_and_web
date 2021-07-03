@@ -1,34 +1,41 @@
-<!DOCTYPE html>
-  <html>
+<!doctype html>
+  <html lang="en">
     <head>
-      <title>Temperature and Humidity Monitor</title>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      
+      <!-- use p5 ble js -->
       <script src="https://unpkg.com/p5ble@0.0.4/dist/p5.ble.js"></script>
+
+      <title>Battery monitor</title>
+
     </head>
 
     <body>
-      <script>
+      <!-- Bootstrap Bundle with Popper -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+      <h1>Reading Temperature and Humidity</h1>
+      <p>Click the button to connect to a BLE device</p>
+      <p><button onclick="connectToBle()">Connect</button></p>
+      <div id="temperatureLevelDiv">Temperature: No data received</div>
+      <div id="humidityLevelDiv">Humidity: No humidity received</div>
+
+      <script>
       const serviceUuid = "19b10010-e8f2-537e-4f6c-d104768a1211";
       let temperatureCharacteristic;
       let humidityCharacteristic;
-      let temperature = 0.0;
-      let humidity = 0.0;
       let myBLE;
 
-      function setup() {
-        // Create a p5ble class
-        myBLE = new p5ble();
-
-        createCanvas(200, 200);
-        textSize(20);
-        textAlign(CENTER, CENTER);
-
-        // Create a 'Connect' button
-        const connectButton = createButton('Connect')
-        connectButton.mousePressed(connectToBle);
-      }
+      var temperatureLevelDiv = document.getElementById("temperatureLevelDiv");
+      var humidityLevelDiv = document.getElementById("humidityLevelDiv");
+      
+      // Create a p5ble class
+      myBLE = new p5ble();
 
       function connectToBle() {
         // Connect to a device by passing the service UUID
@@ -49,26 +56,20 @@
       // functions that will be called once values are received
       function gotTemperature(error, value) {
         if (error) console.log('error: ', error);
-        console.log('value: ', value);
-        temperature = value;
+        console.log('temperature: ', value);
+        temperatureLevelDiv.innerHTML = 'Temperature: ' + value + ' ˚F';
         // After getting a value, call p5ble.read() again to get the value again
         myBLE.read(temperatureCharacteristic, gotTemperature);
       }
 
       function gotHumidity(error, value) {
         if (error) console.log('error: ', error);
-        console.log('value: ', value);
-        humidity = value;
+        console.log('humidity: ', value);
+        humidityLevelDiv.innerHTML = 'Humidity: ' + value + '%';
         // After getting a value, call p5ble.read() again to get the value again
         myBLE.read(humidityCharacteristic, gotHumidity);
       }
       
-      // The draw function is run
-      function draw() {
-        background(250);
-        text(temperature + "˚ F", 100, 100);
-        text(humidity + "% Humidity", 100, 100);
-      }
       </script>
     </body>
   </html>

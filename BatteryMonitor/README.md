@@ -1,15 +1,10 @@
-Introduction to communicating an arduino with the web via BLE
-This is for the Arduino Nano Sense BLE and tested on it.
+Introduction to Arduino and Web communications via BLE.
+Website reading from a single characteristic on the Arduino using notify.
+Built for and tested on Arduino Nano 33 BLE Sense.
 
-BatteryMonitor.cpp is from:
-Examples/ArduinoBLE/BatteryMonitor
-and slightly edited
+How to use:
+Flash the BatteryMonitor.ino to an Arduino.
+(Optional) open the serial monitor, to receive important messages.
+In Google Chrome open: https://3lucasz.github.io/Arduino_BLE_and_web/BatteryMonitor/index.html/
 
-index.html is from:
-https://itpnyu.github.io/p5ble-website/docs/getstarted
-and slightly edited
-
-Website: https://3lucasz.github.io/Arduino_BLE_and_web/BatteryMonitor/index.html/
-
-To try out the website after flashing BatteryMonitor code to the arduino!
-
+BatteryMonitor.ino inspired from ArduinoExamples/BatteryMonitor.

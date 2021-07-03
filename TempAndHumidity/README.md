@@ -1,9 +1,8 @@
-Introduction to communicating an arduino with the web via BLE
-This is for the Arduino Nano Sense BLE and tested on it.
+Website reading from 2 sensors on the arduino using constant reading.
+Built for and tested on Arduino Nano 33 BLE Sense.
 
-Using ArduinoBLE Library and p5.js libraries
-
-Website: https://3lucasz.github.io/Arduino_BLE_and_web/TempAndHumidity/index.html/
-
-To try out the website after flashing BatteryMonitor code to the arduino!
+How to use:
+Flash the Temp-HumidityMonitor.ino to an Arduino.
+(Optional) open the serial monitor, to receive important messages
+In Google Chrome open: https://3lucasz.github.io/Arduino_BLE_and_web/TempAndHumidity/index.html/
 

@@ -29,19 +29,14 @@
           if (error) console.log('error: ', error);
           console.log('characteristics: ', characteristics);
           batteryCharacteristic = characteristics[0];
-          // Read the value of the first characteristic
-          myBLE.read(batteryCharacteristic, gotValue);
+          //start listening for notifications. 
+          //The callback handleNotifications will be called when a notification is received.
+          myBLE.startNotifications(batteryCharacteristic, handleNotifications);
         }
-
-        // A function that will be called once got values
-        function gotValue(error, value) {
-          if (error) console.log('error: ', error);
-          console.log('value: ', value);
-          batteryLevelDiv.innerHTML = value + "% Battery"
-          // After getting a value, call p5ble.read() again to get the value again
-          myBLE.read(batteryCharacteristic, gotValue);
+        function handleNotifications(data) {
+          console.log('value: ', data);
+          batteryLevelDiv.innerHTML = data + "% Battery"
         }
-
       </script>
     </body>
   </html>

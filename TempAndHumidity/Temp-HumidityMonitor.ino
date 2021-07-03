@@ -3,13 +3,13 @@
 #include <ArduinoBLE.h>
 
 //Set up the BLE Service
-BLEService tempHumidityService("AAA1"); //ends with 1
+BLEService tempHumidityService("19b10010-e8f2-537e-4f6c-d104768a1211"); //ends with 1
 
 //Set up the BLE Characteristics
-BLEFloatCharacteristic temperatureLevelChar("AAA2", //ends with 2
+BLEFloatCharacteristic temperatureLevelChar("19b10010-e8f2-537e-4f6c-d104768a1212", //ends with 2
   BLERead | BLENotify); //clients can read and get notified of new changes
 
-BLEFloatCharacteristic humidityLevelChar("AAA3", //ends with 3
+BLEFloatCharacteristic humidityLevelChar("19b10010-e8f2-537e-4f6c-d104768a1213", //ends with 3
   BLERead | BLENotify); //clients can read and get notified of new changes
 
 long previousMillis = 0;

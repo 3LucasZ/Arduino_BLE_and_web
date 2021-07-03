@@ -1,0 +1,6 @@
+{
+    "port": "/dev/cu.usbmodem14101",
+    "board": "arduino:mbed_nano:nano33ble",
+    "programmer": "AVR ISP",
+    "sketch": "MotionClassifier/TinyMotionClassifier.ino"
+}
