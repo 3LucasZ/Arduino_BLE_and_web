@@ -1,19 +1,28 @@
 petContainer = document.getElementById("petContainer");
 class ArduinoPet {
-  faceArray = ["HappyFace", "HappyFace", "HappyFace", "HappyFace", "BlinkFace"];
   constructor() {
-    petContainer.innerHTML += `
+    petContainer.innerHTML +=
+      `
         <div class="container pet-container" style="position: relative"> 
                     <img src="../Images/ArduinoPet.jpg" class="pet-image">
-                    <img src="../Images/HappyFace.jpg" class="pet-face" id="face-img">
+                    <img src="` +
+      FacesPath +
+      `Default.jpg" class="pet-face" id="face-img">
         </div>
         `;
   }
-  DisplayFace(faceId) {
-    Document.getElementById("face-img").src =
-      "../Images/" + faceArray[faceId] + ".jpg";
+  UpdateFace() {
+    //debugging
+    //console.log(loopedArray);
+    //console.log(loopedArray[0]);
+    if (loopedArray[0] === undefined) {
+      loopedArray = [].concat(defaultArray);
+    }
+    document.getElementById("face-img").src =
+      FacesPath + loopedArray[0] + ".jpg";
+    //remove the first element of the array
+    loopedArray.shift();
   }
 }
-
 myPet = new ArduinoPet();
-//setInterval(myPet.DisplayFace,250)
+setInterval(myPet.UpdateFace, 500);

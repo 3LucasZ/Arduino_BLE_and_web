@@ -68,7 +68,7 @@ meters.push(
   new CustomMeter(
     "DarkGrey-bd",
     "LightGrey-bg",
-    "../Images/HungerIndicator.jpg",
+    MeterIconsPath + "EatMeter" + ".jpg",
     1
   )
 );
@@ -77,11 +77,16 @@ meters.push(
   new CustomMeter(
     "Gold-bd",
     "ArduinoOrange-bg",
-    "../Images/HappyIndicator.jpg",
+    MeterIconsPath + "PlayMeter" + ".jpg",
     2
   )
 );
-
+function restartMeters() {
+  for (i = 0; i < ACTIONS.length - 1; i++) {
+    selectedMeter = meters[i];
+    selectedMeter.value = 1000;
+  }
+}
 function decayAll() {
   for (i = 0; i < ACTIONS.length - 1; i++) {
     selectedMeter = meters[i];

@@ -38,12 +38,3 @@ function gotCharacteristics(error, characteristics) {
     myBLE.startNotifications(actionCharacteristic, handleNotifications);
   }
 }
-
-// Callback function for when notifications are received
-function handleNotifications(data) {
-  console.log("received: ", data);
-  actionDiv.innerHTML = "action: " + ACTIONS[data];
-  if (data > 0) {
-    meters[data - 1].activated();
-  }
-}
