@@ -1,0 +1,10 @@
+#microphone-popover {
+    position: absolute;
+    width: 13.8%;
+    left: 45.5%;
+    top: 33.3%;
+}
+#microphone-popover:focus {
+    box-shadow: 0 0 0 3px red;
+}
+

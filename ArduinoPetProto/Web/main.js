@@ -20,10 +20,6 @@ var statusDiv = document.getElementById("statusDiv");
 const FacesPath = "../Images/Faces/";
 const MeterIconsPath = "../Images/MeterIcons/";
 const ArduinoComponentsPath = "../Images/ArduinoComponents/";
-//Allow popovers for index.html
-[...document.querySelectorAll('[data-bs-toggle="popover"]')].forEach(
-  el => new bootstrap.Popover(el)
-);
 
 function startGame() {
   restartMeters();
